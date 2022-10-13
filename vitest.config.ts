@@ -9,7 +9,7 @@ export default defineConfig({
       lines: 80,
       statements: 80,
       include: ['src/**/*.ts'],
-      exclude: ['src/**/{types,index}.ts', '**/*.spec.ts'],
+      exclude: ['src/**/{types,index,.type}.ts', '**/*.spec.ts'],
       all: true,
     },
     include: ['src/**/*.spec.ts'],
