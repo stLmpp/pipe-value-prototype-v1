@@ -1,4 +1,3 @@
-import { TransformSymbol } from './transform-symbol';
 import { PipeOperator } from './types';
 
 export class Transform<T> {
@@ -7,8 +6,6 @@ export class Transform<T> {
   }
 
   readonly #value: T;
-
-  readonly [TransformSymbol] = true;
 
   get value(): T {
     return this.#value;
@@ -145,14 +142,14 @@ export class Transform<T> {
     ...operators: PipeOperator<any, any>[]
   ): Transform<M>;
   pipe(...operators: PipeOperator<any, any>[]): Transform<any> {
-    let newTransform: Transform<any> = transform(this.value);
+    let newTransform: Transform<any> = Transform.create(this.value);
     for (const operator of operators) {
-      newTransform = transform(operator(newTransform.value));
+      newTransform = Transform.create(operator(newTransform.value));
     }
     return newTransform;
   }
-}
 
-export function transform<T>(value: T): Transform<T> {
-  return new Transform(value);
+  static create<T>(value: T): Transform<T> {
+    return new Transform(value);
+  }
 }
