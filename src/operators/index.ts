@@ -1,5 +1,14 @@
+export { arrayAppend } from './array-append';
+export { arrayFilter } from './array-filter';
 export { arrayMap } from './array-map';
+export { arrayPrepend } from './array-prepend';
+export { arrayRemove } from './array-remove';
 export { arrayToMap } from './array-to-map';
-export { arrayToSet } from './array-to-set';
 export { arrayToObject } from './array-to-object';
+export { arrayToSet } from './array-to-set';
+export { arrayUpdate } from './array-update';
+export { arrayUpsert } from './array-upsert';
+export { coerceArray } from './coerce-array';
+export { identity } from './identity';
 export { map } from './map';
+export { mapTo } from './map-to';
