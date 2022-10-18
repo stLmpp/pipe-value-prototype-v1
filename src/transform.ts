@@ -142,11 +142,8 @@ export class Transform<T> {
     ...operators: PipeOperator<any, any>[]
   ): Transform<M>;
   pipe(...operators: PipeOperator<any, any>[]): Transform<any> {
-    let newTransform: Transform<any> = Transform.create(this.value);
-    for (const operator of operators) {
-      newTransform = Transform.create(operator(newTransform.value));
-    }
-    return newTransform;
+    const newValue = operators.reduce((value, operator) => operator(value), this.#value);
+    return Transform.create(newValue);
   }
 
   static create<T>(value: T): Transform<T> {
