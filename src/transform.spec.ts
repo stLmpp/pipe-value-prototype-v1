@@ -1,4 +1,3 @@
-import { arrayMap, arrayToMap, map } from './operators';
 import { Transform } from './transform';
 
 describe('Transform', () => {
@@ -30,14 +29,14 @@ describe('Transform', () => {
   });
 
   it('should pipe operator and change value', () => {
-    const newData = transformData.pipe(arrayMap((item) => item.id));
+    const newData = transformData.pipe((array) => array.map((item) => item.id));
     expect(newData.value).toEqual([1, 2]);
   });
 
   it('should pipe multiple operators and change value', () => {
     const newData = transformData.pipe(
-      arrayToMap((item) => item.id),
-      map((newMap) => [...newMap])
+      (array) => array.reduce((acc, item) => acc.set(item.id, item), new Map()),
+      (newMap) => [...newMap]
     );
     expect(newData.value).toEqual(
       expect.arrayContaining([
