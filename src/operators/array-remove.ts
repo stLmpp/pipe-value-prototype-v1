@@ -2,6 +2,9 @@ import type { ArrayCallback, PipeOperator } from '../types';
 
 import { arrayFilter } from './array-filter';
 
+/**
+ * @public
+ */
 export function arrayRemove<T>(
   predicate: ArrayCallback<T, unknown>
 ): PipeOperator<readonly T[], T[]> {

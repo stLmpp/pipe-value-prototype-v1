@@ -2,6 +2,9 @@ import type { ArrayCallback, ArrayPredicate, PipeOperator } from '../types';
 
 import { map } from './map';
 
+/**
+ * @public
+ */
 export function arrayUpdate<T>(
   predicate: ArrayPredicate<T>,
   update: ArrayCallback<T, T>

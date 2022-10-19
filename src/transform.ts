@@ -1,5 +1,8 @@
 import type { PipeOperator } from './types';
 
+/**
+ * @public
+ */
 export class Transform<T> {
   constructor(value: T) {
     this.#value = value;

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { spawn } from 'node:child_process';
+import { spawn, type SpawnOptions } from 'node:child_process';
 import { rename, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { performance } from 'node:perf_hooks';
@@ -15,6 +15,13 @@ const ESM_PATH = join(DIST_PATH, 'esm');
 const CJS_PATH = join(DIST_PATH, 'cjs');
 const TYPES_PATH = join(DIST_PATH, 'types');
 const FINAL_TYPES_PATH = join(DIST_PATH, 'index.d.ts');
+
+const SPAWN_OPTIONS: SpawnOptions = {
+  shell: true,
+  env: process.env,
+  stdio: 'inherit',
+  cwd: process.cwd(),
+};
 
 function asyncRimraf(path: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -36,10 +43,7 @@ const DEFAULT_CONFIG: BuildOptions = {
 async function emitDeclarations(): Promise<void> {
   return new Promise((resolve, reject) => {
     try {
-      const child = spawn('npm', ['run', 'build-types'], {
-        shell: true,
-        env: process.env,
-      });
+      const child = spawn('npm', ['run', 'build-types'], SPAWN_OPTIONS);
       child.on('close', () => {
         resolve();
       });
@@ -55,10 +59,7 @@ async function emitDeclarations(): Promise<void> {
 async function apiExtractor(): Promise<void> {
   return new Promise((resolve, reject) => {
     try {
-      const child = spawn('npm', ['run', 'api-extractor'], {
-        shell: true,
-        env: process.env,
-      });
+      const child = spawn('npm', ['run', 'api-extractor'], SPAWN_OPTIONS);
       child.on('close', () => {
         resolve();
       });
@@ -85,7 +86,28 @@ async function renameAllCJS(): Promise<void> {
 }
 
 function getMs(startMs: number): string {
-  return `${((performance.now() - startMs) / 1_000).toFixed(1)}s`;
+  return `+${((performance.now() - startMs) / 1_000).toFixed(1)}s`;
+}
+
+function sortPackageJSON(packageJSON: PackageJson): PackageJson {
+  const values = new Map<keyof PackageJson, number>()
+    .set('name', 0)
+    .set('version', 1)
+    .set('description', 2)
+    .set('author', 2.1)
+    .set('license', 2.2)
+    .set('repository', 2.3)
+    .set('main', 3)
+    .set('module', 4)
+    .set('types', 5)
+    .set('exports', 6)
+    .set('scripts', 7)
+    .set('dependencies', 8)
+    .set('devDependencies', 9);
+  const keys = Object.keys(packageJSON).sort(
+    (valueA, valueB) => (values.get(valueA) ?? Infinity) - (values.get(valueB) ?? Infinity)
+  );
+  return keys.reduce((acc, key) => ({ ...acc, [key]: packageJSON[key] }), {});
 }
 
 async function main(): Promise<void> {
@@ -138,12 +160,14 @@ async function main(): Promise<void> {
   packageJSON.main = './cjs/index.cjs';
   packageJSON.module = './esm/index.js';
   packageJSON.types = './index.d.ts';
-  await writeFile(join(DIST_PATH, 'package.json'), JSON.stringify(packageJSON, null, 2));
+  await writeFile(
+    join(DIST_PATH, 'package.json'),
+    JSON.stringify(sortPackageJSON(packageJSON), null, 2)
+  );
   console.log('Copy package.json', getMs(packageJSONMs));
   const renameAllCJSMs = performance.now();
   await renameAllCJS();
   console.log('Renamed all js to cjs in the cjs folder', getMs(renameAllCJSMs));
-  console.log('Total', getMs(startMs));
 }
 
 main();

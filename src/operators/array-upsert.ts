@@ -2,11 +2,17 @@ import type { ArrayCallback, ArrayPredicate, PipeOperator } from '../types';
 
 import { map } from './map';
 
+/**
+ * @public
+ */
 export interface ArrayUpsertOptions<T> {
   update?: ArrayCallback<T, T>;
   insert?: () => T;
 }
 
+/**
+ * @public
+ */
 export function arrayUpsert<T>(
   getter: ArrayPredicate<T>,
   handler: ArrayUpsertOptions<T>

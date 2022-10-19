@@ -13,8 +13,12 @@
     "build-types": "tsc -p tsconfig.build.json --emitDeclarationOnly",
     "api-extractor": "api-extractor run --local --verbose"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "stLmpp",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/stLmpp/pipe-value-prototype-v1",
+    "type": "git"
+  },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.33.4",
     "@types/node": "16.11.66",

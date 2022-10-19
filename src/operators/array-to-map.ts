@@ -2,6 +2,9 @@ import type { ArrayCallback, PipeOperator } from '../types';
 
 import { map } from './map';
 
+/**
+ * @public
+ */
 export function arrayToMap<T, R>(
   callback: ArrayCallback<T, R>
 ): PipeOperator<readonly T[], Map<R, T>> {
