@@ -1,5 +1,5 @@
 import { coerceArrayFn } from '../internal';
-import { PipeOperator } from '../types';
+import type { PipeOperator } from '../types';
 
 import { map } from './map';
 

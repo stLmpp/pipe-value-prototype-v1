@@ -1,8 +1,8 @@
-import { ArrayCallback, ArrayPredicate, PipeOperator } from '../types';
+import type { ArrayCallback, ArrayPredicate, PipeOperator } from '../types';
 
 import { map } from './map';
 
-interface ArrayUpsertOptions<T> {
+export interface ArrayUpsertOptions<T> {
   update?: ArrayCallback<T, T>;
   insert?: () => T;
 }

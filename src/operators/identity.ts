@@ -1,4 +1,4 @@
-import { PipeMonoOperator } from '../types';
+import type { PipeMonoOperator } from '../types';
 
 export function identity<T>(): PipeMonoOperator<T> {
   return (value) => value;

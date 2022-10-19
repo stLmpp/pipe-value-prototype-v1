@@ -7,7 +7,7 @@ export { arrayToMap } from './array-to-map';
 export { arrayToObject } from './array-to-object';
 export { arrayToSet } from './array-to-set';
 export { arrayUpdate } from './array-update';
-export { arrayUpsert } from './array-upsert';
+export { arrayUpsert, type ArrayUpsertOptions } from './array-upsert';
 export { coerceArray } from './coerce-array';
 export { identity } from './identity';
 export { map } from './map';

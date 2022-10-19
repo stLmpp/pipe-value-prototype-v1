@@ -1,4 +1,4 @@
-import { PipeOperator } from './types';
+import type { PipeOperator } from './types';
 
 export class Transform<T> {
   constructor(value: T) {

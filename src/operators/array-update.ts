@@ -1,4 +1,4 @@
-import { ArrayCallback, ArrayPredicate, PipeOperator } from '../types';
+import type { ArrayCallback, ArrayPredicate, PipeOperator } from '../types';
 
 import { map } from './map';
 

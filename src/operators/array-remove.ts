@@ -1,4 +1,4 @@
-import { ArrayCallback, PipeOperator } from '../types';
+import type { ArrayCallback, PipeOperator } from '../types';
 
 import { arrayFilter } from './array-filter';
 

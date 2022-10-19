@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "lib": ["ESNext", "dom"],
+    "target": "ES2018",
+    "lib": ["ESNext", "DOM"],
     "module": "commonjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "importHelpers": true,
+    "resolveJsonModule": true
   }
 }
