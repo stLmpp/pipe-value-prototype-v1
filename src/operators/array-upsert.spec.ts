@@ -30,4 +30,12 @@ describe('arrayUpsert', () => {
       Transform.create([{ id: 1 }]).pipe(arrayUpsert((item) => item.id === 1, {})).value
     ).toEqual([{ id: 1 }]);
   });
+
+  it('should prepend values', () => {
+    expect(
+      Transform.create([{ id: 1 }]).pipe(
+        arrayUpsert((item) => item.id === 2, { insert: () => ({ id: 2 }), prepend: true })
+      ).value
+    ).toEqual([{ id: 2 }, { id: 1 }]);
+  });
 });

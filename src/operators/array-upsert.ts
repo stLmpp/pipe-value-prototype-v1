@@ -8,6 +8,8 @@ import { map } from './map';
 export interface ArrayUpsertOptions<T> {
   update?: ArrayCallback<T, T>;
   insert?: () => T;
+  append?: boolean;
+  prepend?: boolean;
 }
 
 /**
@@ -27,7 +29,11 @@ export function arrayUpsert<T>(
       newArray[index] = handler.update(newArray[index], index, newArray);
     }
     if (index === -1 && handler.insert) {
-      newArray = [...newArray, handler.insert()];
+      if (handler.prepend) {
+        newArray = [handler.insert(), ...newArray];
+      } else {
+        newArray = [...newArray, handler.insert()];
+      }
     }
     return newArray;
   });

@@ -5,6 +5,6 @@ import { map } from './map';
 /**
  * @public
  */
-export function arrayPrepend<T>(item: T): PipeOperator<readonly T[], T[]> {
-  return map((array) => [item, ...array]);
+export function arrayPrepend<T>(...items: readonly T[]): PipeOperator<readonly T[], T[]> {
+  return map((array) => [...items, ...array]);
 }
