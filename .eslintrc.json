@@ -174,7 +174,6 @@
               "constructor",
 
               "private-decorated-field",
-              "private-abstract-field",
               "private-instance-field",
               "private-field",
 
@@ -193,17 +192,14 @@
 
               "private-decorated-method",
               "private-instance-method",
-              "private-abstract-method",
               "private-method",
 
               "protected-decorated-method",
               "protected-instance-method",
-              "protected-abstract-method",
               "protected-method",
 
               "public-decorated-method",
               "public-instance-method",
-              "public-abstract-method",
               "public-method",
 
               "decorated-method",

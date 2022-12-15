@@ -1,8 +1,15 @@
 export { arrayAppend } from './array-append';
+export { arrayAt } from './array-at';
 export { arrayFilter } from './array-filter';
+export { arrayFind } from './array-find';
+export { arrayFindOrFail } from './array-find-or-fail';
+export { arrayInsert } from './array-insert';
 export { arrayMap } from './array-map';
 export { arrayPrepend } from './array-prepend';
 export { arrayRemove } from './array-remove';
+export { arrayRemoveByIndex } from './array-remove-by-index';
+export { arraySort } from './array-sort';
+export { arraySortBy, type ArraySortByOptions } from './array-sort-by';
 export { arrayToMap } from './array-to-map';
 export { arrayToObject } from './array-to-object';
 export { arrayToSet } from './array-to-set';

@@ -37,3 +37,4 @@ package.json.yarn
 .env
 yarn.lock
 temp
+pnpm-lock.yaml
